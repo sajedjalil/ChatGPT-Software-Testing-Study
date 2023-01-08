@@ -20,7 +20,6 @@ class FileReader:
         return x1.sheet_names
 
     def replace_sheet(self, file_name, sheet, df: pd.DataFrame):
-
         with pd.ExcelWriter(os.path.join(self.dataset_path, file_name), engine="openpyxl", mode="a",
                             if_sheet_exists="replace") as writer:
             df.to_excel(writer, sheet_name=sheet, index=False)

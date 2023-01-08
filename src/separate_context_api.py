@@ -1,5 +1,6 @@
-from chatgpt_wrapper import ChatGPT
 import sys
+
+from chatgpt_wrapper import ChatGPT
 from constant import *
 
 
@@ -17,6 +18,4 @@ if __name__ == '__main__':
     separate_context = SeparateContextAPI()
 
     input = sys.argv[1]
-
     print(separate_context.get_api_response(input))
-    print(response_separator)

@@ -1,6 +1,8 @@
-from chatgpt_wrapper import ChatGPT
 import sys
+
+from chatgpt_wrapper import ChatGPT
 from constant import *
+
 
 class SharedContextAPI():
     bot: ChatGPT = None
