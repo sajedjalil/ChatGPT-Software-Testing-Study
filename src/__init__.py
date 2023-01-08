@@ -1,8 +1,12 @@
+import pandas as pd
+
 import file_reader
 from src.single_context_api import SingleContextAPI
+import subprocess
+from constant import *
 
 
-def single_context(df):
+def single_context(df, sheet):
     question_dict: dict = {}
     for index, row in df.iterrows():
 
@@ -11,18 +15,35 @@ def single_context(df):
         else:
             question_dict[row['id']].append('\n(' + row['subsection id'] + ') ' + row['question'])
 
-    print(question_dict)
-    for key in question_dict:
-        questions: list = question_dict[key]
+    for index, row in df.iterrows():
+        if not pd.isna(df.iloc[index]['answer']):
+            continue
+        print('Running query on:\n', sheet, row['id'], row['subsection id'])
 
-        single_context = SingleContextAPI()
-        for question in questions:
-            print(question)
-            print(single_context.get_api_response(question))
+        questions: list = question_dict[row['id']]
+        command = ["python3", "single_context_api.py"]
+        command.extend(questions)
+
+        data = subprocess.run(command, capture_output=True)
+        print(data.stdout)
+        responses = data.stdout.decode().split(response_separator)[:-1]
+
+        for idx, response in enumerate(responses):
+            df._set_value(index + idx, 'answer', response)
+
+        print('Finished:\n', sheet, row['id'], row['subsection id'])
+        print(df['answer'])
+
+    return df
 
 
 if __name__ == '__main__':
     file_reader = file_reader.FileReader()
-    df = file_reader.read_xlsx('testing.xlsx')
+    sheets = file_reader.get_sheet_names(output_file_xlsx)
 
-    single_context(df)
+    for sheet in sheets:
+        df = file_reader.read_xlsx(output_file_xlsx, sheet)
+        df = single_context(df, sheet)
+
+        file_reader.replace_sheet(output_file_xlsx, sheet, df)
+        print("Sheet", sheet, "completed.")
