@@ -1,8 +1,10 @@
-from chatgpt_wrapper import ChatGPT
 import sys
+
+from chatgpt_wrapper import ChatGPT
 from constant import *
 
-class SingleContextAPI():
+
+class SeparateContextAPI():
     bot: ChatGPT = None
 
     def __init__(self):
@@ -13,8 +15,7 @@ class SingleContextAPI():
 
 
 if __name__ == '__main__':
-    single_context = SingleContextAPI()
+    separate_context = SeparateContextAPI()
 
-    for input in sys.argv[1:]:
-        print(single_context.get_api_response(input))
-        print(response_separator)
+    input = sys.argv[1]
+    print(separate_context.get_api_response(input))
