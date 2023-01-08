@@ -2,7 +2,7 @@ from chatgpt_wrapper import ChatGPT
 import sys
 from constant import *
 
-class SingleContextAPI():
+class SharedContextAPI():
     bot: ChatGPT = None
 
     def __init__(self):
@@ -13,8 +13,8 @@ class SingleContextAPI():
 
 
 if __name__ == '__main__':
-    single_context = SingleContextAPI()
+    shared_context = SharedContextAPI()
 
     for input in sys.argv[1:]:
-        print(single_context.get_api_response(input))
+        print(shared_context.get_api_response(input))
         print(response_separator)

@@ -1,12 +1,12 @@
 import pandas as pd
 
 import file_reader
-from src.single_context_api import SingleContextAPI
+from src.shared_context_api import SharedContextAPI
 import subprocess
 from constant import *
 
 
-def single_context(df, sheet):
+def shared_context(df, sheet):
     question_dict: dict = {}
     for index, row in df.iterrows():
 
@@ -21,7 +21,7 @@ def single_context(df, sheet):
         print('Running query on:\n', sheet, row['id'], row['subsection id'])
 
         questions: list = question_dict[row['id']]
-        command = ["python3", "single_context_api.py"]
+        command = ["python3", "shared_context_api.py"]
         command.extend(questions)
 
         data = subprocess.run(command, capture_output=True)
@@ -29,12 +29,19 @@ def single_context(df, sheet):
         responses = data.stdout.decode().split(response_separator)[:-1]
 
         for idx, response in enumerate(responses):
-            df._set_value(index + idx, 'answer', response)
+            df._set_value(index + idx, shared_context_answer_col, response)
 
         print('Finished:\n', sheet, row['id'], row['subsection id'])
         print(df['answer'])
 
     return df
+
+def separate_context(df, sheet):
+
+    for index, row in df.iterrows():
+        print(row)
+
+    # return df
 
 
 if __name__ == '__main__':
@@ -43,7 +50,9 @@ if __name__ == '__main__':
 
     for sheet in sheets:
         df = file_reader.read_xlsx(output_file_xlsx, sheet)
-        df = single_context(df, sheet)
+        # df = shared_context(df, sheet)
+        #
+        # file_reader.replace_sheet(output_file_xlsx, sheet, df)
+        # print("Sheet", sheet, "completed.")
 
-        file_reader.replace_sheet(output_file_xlsx, sheet, df)
-        print("Sheet", sheet, "completed.")
+        separate_context(df, sheet)
