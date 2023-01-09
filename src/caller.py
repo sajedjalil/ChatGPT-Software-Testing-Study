@@ -1,9 +1,20 @@
 import subprocess
-
 import pandas as pd
 
 from constant import *
 from src.file_reader import FileReader
+
+
+def __construct_question(row, skip_main_question: bool) -> str:
+    main_question = ''
+    if not pd.isna(row['question content']) and skip_main_question is False:
+        main_question += row['question content']
+
+    subsection: str = '\n'
+    if not pd.isna(row['subsection id']):
+        subsection += '(' + subsection + ') '
+
+    return main_question + subsection + row['question']
 
 
 def __generate_question_dict(df):
@@ -11,9 +22,10 @@ def __generate_question_dict(df):
     for index, row in df.iterrows():
 
         if row['id'] not in question_dict:
-            question_dict[row['id']] = [row['question content'] + '\n(' + row['subsection id'] + ') ' + row['question']]
+            question_dict[row['id']] = [__construct_question(row, False)]
         else:
-            question_dict[row['id']].append('\n(' + row['subsection id'] + ') ' + row['question'])
+            question_dict[row['id']].append(__construct_question(row, True))
+
     return question_dict
 
 
@@ -42,8 +54,8 @@ def generate_shared_context():
                 df._set_value(index + idx, shared_context_answer_col, response)
 
             print('Shared context', 'Finished:\n', sheet, row['id'], row['subsection id'])
+            file_reader.replace_sheet(output_file_xlsx, sheet, df)
 
-        file_reader.replace_sheet(output_file_xlsx, sheet, df)
         print('Shared context', "Sheet", sheet, "completed.")
 
 
@@ -59,7 +71,7 @@ def generate_separate_context():
                 continue
             print('Separate context', 'Running query on:\n', sheet, row['id'], row['subsection id'])
 
-            question = row['question content'] + '\n(' + row['subsection id'] + ') ' + row['question']
+            question = __construct_question(row, False)
             command = ["python3", "separate_context_api.py", question]
 
             data = subprocess.run(command, capture_output=True)
