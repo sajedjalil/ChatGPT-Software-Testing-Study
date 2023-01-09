@@ -4,7 +4,7 @@ from chatgpt_wrapper import ChatGPT
 from constant import *
 
 
-class SharedContextAPI():
+class SharedContextAPI:
     bot: ChatGPT = None
 
     def __init__(self):

@@ -34,8 +34,7 @@ def generate_shared_context():
     sheets = file_reader.get_sheet_names(output_file_xlsx)
 
     for sheet in sheets:
-        if sheet == 'ch1':
-            continue
+
         df = file_reader.read_xlsx(output_file_xlsx, sheet)
         question_dict = __generate_question_dict(df)
 

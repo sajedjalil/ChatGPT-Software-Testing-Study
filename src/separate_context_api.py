@@ -1,10 +1,9 @@
 import sys
 
 from chatgpt_wrapper import ChatGPT
-from constant import *
 
 
-class SeparateContextAPI():
+class SeparateContextAPI:
     bot: ChatGPT = None
 
     def __init__(self):
