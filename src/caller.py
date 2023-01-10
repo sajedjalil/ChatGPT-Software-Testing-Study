@@ -12,7 +12,7 @@ def __construct_question(row, skip_main_question: bool) -> str:
 
     subsection: str = '\n'
     if not pd.isna(row['subsection id']):
-        subsection += '(' + subsection + ') '
+        subsection += '(' + row['subsection id'] + ') '
 
     return main_question + subsection + row['question']
 
