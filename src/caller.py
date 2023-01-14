@@ -1,7 +1,8 @@
 import subprocess
-import pandas as pd
 
-from constant import *
+import numpy as np
+import pandas as pd
+from constant import Constant
 from src.file_reader import FileReader
 
 
@@ -31,55 +32,65 @@ def __generate_question_dict(df):
 
 def generate_shared_context():
     file_reader = FileReader()
-    sheets = file_reader.get_sheet_names(output_file_xlsx)
+    sheets = file_reader.get_sheet_names(Constant.output_file_xlsx)
 
-    for sheet in sheets:
+    for iteration in range(1, Constant.iterations+1):
+        for sheet in sheets:
+            df = file_reader.read_xlsx(Constant.output_file_xlsx, sheet)
+            question_dict = __generate_question_dict(df)
+            column_name = Constant.shared_context_answer_col + str(iteration)
+            if column_name not in df.columns:
+                df[column_name] = np.nan
 
-        df = file_reader.read_xlsx(output_file_xlsx, sheet)
-        question_dict = __generate_question_dict(df)
+            for index, row in df.iterrows():
+                if not pd.isna(df.iloc[index][column_name]):
+                    continue
+                print('Iteration', iteration, "\n",
+                      'Shared context', 'Running query on:\n', sheet, row['id'], row['subsection id'])
 
-        for index, row in df.iterrows():
-            if not pd.isna(df.iloc[index][shared_context_answer_col]):
-                continue
-            print('Shared context', 'Running query on:\n', sheet, row['id'], row['subsection id'])
+                questions: list = question_dict[row['id']]
+                command = ["python3", "shared_context_api.py"]
+                command.extend(questions)
 
-            questions: list = question_dict[row['id']]
-            command = ["python3", "shared_context_api.py"]
-            command.extend(questions)
+                data = subprocess.run(command, capture_output=True)
+                responses = data.stdout.decode().split(Constant.response_separator)[:-1]
 
-            data = subprocess.run(command, capture_output=True)
-            responses = data.stdout.decode().split(response_separator)[:-1]
+                for idx, response in enumerate(responses):
+                    df._set_value(index + idx, column_name, response)
 
-            for idx, response in enumerate(responses):
-                df._set_value(index + idx, shared_context_answer_col, response)
+                print('Shared context', 'Finished:\n', sheet, row['id'], row['subsection id'])
+                print(df[column_name])
+                file_reader.replace_sheet(Constant.output_file_xlsx, sheet, df)
 
-            print('Shared context', 'Finished:\n', sheet, row['id'], row['subsection id'])
-            file_reader.replace_sheet(output_file_xlsx, sheet, df)
-
-        print('Shared context', "Sheet", sheet, "completed.")
+            print('Shared context', "Sheet", sheet, "completed.")
 
 
 def generate_separate_context():
     file_reader = FileReader()
-    sheets = file_reader.get_sheet_names(output_file_xlsx)
+    sheets = file_reader.get_sheet_names( Constant.output_file_xlsx)
 
-    for sheet in sheets:
-        df = file_reader.read_xlsx(output_file_xlsx, sheet)
+    for iteration in range(1, Constant.iterations + 1):
+        for sheet in sheets:
+            df = file_reader.read_xlsx(Constant.output_file_xlsx, sheet)
+            column_name = Constant.separate_context_answer_col + str(iteration)
+            if column_name not in df.columns:
+                df[column_name] = np.nan
 
-        for index, row in df.iterrows():
-            if not pd.isna(df.iloc[index][separate_context_answer_col]):
-                continue
-            print('Separate context', 'Running query on:\n', sheet, row['id'], row['subsection id'])
+            for index, row in df.iterrows():
+                if not pd.isna(df.iloc[index][column_name]):
+                    continue
+                print('Iteration', iteration, "\n",
+                      'Separate context', 'Running query on:\n', sheet, row['id'], row['subsection id'])
 
-            question = __construct_question(row, False)
-            command = ["python3", "separate_context_api.py", question]
+                question = __construct_question(row, False)
+                command = ["python3", "separate_context_api.py", question]
 
-            data = subprocess.run(command, capture_output=True)
-            response = data.stdout.decode().strip()
-            df._set_value(index, separate_context_answer_col, response)
+                data = subprocess.run(command, capture_output=True)
+                response = data.stdout.decode().strip()
+                df._set_value(index, column_name, response)
 
-            print('Separate context', 'Finished:\n', sheet, row['id'], row['subsection id'])
-            print(df[separate_context_answer_col])
-            file_reader.replace_sheet(output_file_xlsx, sheet, df)
+                print('Separate context', 'Finished:\n', sheet, row['id'], row['subsection id'])
+                print(df[column_name])
+                file_reader.replace_sheet(Constant.output_file_xlsx, sheet, df)
 
-        print('Separate context:', "Sheet", sheet, "completed.")
+            print('Separate context:', "Sheet", sheet, "completed.")

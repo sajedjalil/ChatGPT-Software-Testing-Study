@@ -1,7 +1,8 @@
 import sys
+import time
 
 from chatgpt_wrapper import ChatGPT
-from constant import *
+from constant import Constant
 
 
 class SharedContextAPI:
@@ -18,5 +19,6 @@ if __name__ == '__main__':
     shared_context = SharedContextAPI()
 
     for input in sys.argv[1:]:
+        time.sleep( Constant.interval_delay)
         print(shared_context.get_api_response(input))
-        print(response_separator)
+        print(Constant.response_separator)
