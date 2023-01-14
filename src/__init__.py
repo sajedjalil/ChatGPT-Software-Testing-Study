@@ -4,6 +4,7 @@ from constant import Constant
 
 if __name__ == '__main__':
     Constant.iterations = 5
-    Constant.interval_delay = 10 #sec
+    Constant.interval_delay = 10  # sec
+
     generate_shared_context()
     generate_separate_context()

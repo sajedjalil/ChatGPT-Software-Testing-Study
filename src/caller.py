@@ -34,7 +34,7 @@ def generate_shared_context():
     file_reader = FileReader()
     sheets = file_reader.get_sheet_names(Constant.output_file_xlsx)
 
-    for iteration in range(1, Constant.iterations+1):
+    for iteration in range(1, Constant.iterations + 1):
         for sheet in sheets:
             df = file_reader.read_xlsx(Constant.output_file_xlsx, sheet)
             question_dict = __generate_question_dict(df)
@@ -67,7 +67,7 @@ def generate_shared_context():
 
 def generate_separate_context():
     file_reader = FileReader()
-    sheets = file_reader.get_sheet_names( Constant.output_file_xlsx)
+    sheets = file_reader.get_sheet_names(Constant.output_file_xlsx)
 
     for iteration in range(1, Constant.iterations + 1):
         for sheet in sheets:

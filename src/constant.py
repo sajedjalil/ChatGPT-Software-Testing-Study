@@ -5,4 +5,3 @@ class Constant:
     separate_context_answer_col = 'answer (separate_context) - '
     interval_delay = 10
     iterations = 5
-

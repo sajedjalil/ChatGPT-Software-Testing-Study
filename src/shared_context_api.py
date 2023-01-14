@@ -19,6 +19,6 @@ if __name__ == '__main__':
     shared_context = SharedContextAPI()
 
     for input in sys.argv[1:]:
-        time.sleep( Constant.interval_delay)
+        time.sleep(Constant.interval_delay)
         print(shared_context.get_api_response(input))
         print(Constant.response_separator)
