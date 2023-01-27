@@ -1,8 +1,9 @@
 import sys
 import time
 
-from constant import Constant
 from chatgpt_wrapper import ChatGPT
+
+from constant import Constant
 
 
 class SeparateContextAPI:

@@ -1,0 +1,42 @@
+Question:
+/**
+   * Find LAST index of zero
+   *
+   * @param x array to search
+   * @return index of last 0 in x; -1 if absent
+   * @throws NullPointerException if x is null
+   */
+   public static int lastZero (int[] x)
+   {
+      for (int i = 0; i < x.length; i++)
+      {
+         if (x[i] == 0)
+         {
+            return i;
+         }
+      }
+      return -1;
+   }
+// test: x = [0, 1, 0]; Expected = 2
+
+If possible give a test case that results in an error, but not a failure.
+If not, briefly explain why not. Hint: Don’t forget about the program counter.
+
+
+ChatGPT:
+A test case that results in an error, but not a failure is passing a null value to the function as an argument, for example:
+
+Copy code
+lastZero(null);
+This will throw a NullPointerException because the code checks for a null value and throws an exception if the input array is null. This is an error because it indicates that something unexpected happened in the program, but it's not a failure because the program will not crash or halt, it will just throw an exception and the program can continue executing other lines of code after catching the exception.
+
+In this scenario, the program counter will point to the line where the exception is thrown and the execution of the program will be interrupted until the exception is handled or the program exits.
+
+It is worth noting that this error case is handled explicitly by the code, it will throw the exception if the input is null, so it is not a failure but it is an error.
+
+
+-----------------------------------------------------------------------
+Verdict:
+The answer is correct because it is possible.
+
+But explanation is not what expected.

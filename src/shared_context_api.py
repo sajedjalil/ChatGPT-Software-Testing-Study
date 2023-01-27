@@ -2,6 +2,7 @@ import sys
 import time
 
 from chatgpt_wrapper import ChatGPT
+
 from constant import Constant
 
 
