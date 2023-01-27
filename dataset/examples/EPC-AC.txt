@@ -1,0 +1,44 @@
+Question:
+Consider the following three example classes. These are OO faults taken from Joshua Bloch’s
+Effective Java, Second Edition. Answer the following questions about each.
+
+
+public class BigDecimalTest
+{
+BigDecimal x = new BigDecimal (""1.0"");
+BigDecimal y = new BigDecimal (""1.00"");
+// Fact: !x.equals (y), but x.compareTo (y) == 0
+Set <BigDecimal> BigDecimalTree = new TreeSet <BigDecimal> ();
+BigDecimalTree.add (x);
+BigDecimalTree.add (y);
+// TreeSet uses compareTo(), so BigDecimalTree now has 1 element
+Set <BigDecimal> BigDecimalHash = new HashSet <BigDecimal> ();
+BigDecimalHash.add (x);
+BigDecimalHash.add (y);
+// HashSet uses equals(), so BigDecimalHash now has 2 elements
+}
+// Test: System.out.println (""BigDecimalTree = "" + BigDecimalTree);
+// System.out.println (""BigDecimalHash = "" + BigDecimalHash);
+// Expected: BigDecimalTree = 1; BigDecimalHash = 1
+// See Java Doc for add() in Set Interface
+// The problem is that in BigDecimal, equals() and compareTo()
+// are inconsistent. Let’s suppose we decide that compareTo() is correct,
+// and that equals()is faulty.
+
+If possible, give a test case that results in an error, but not a failure.
+If not, briefly explain why not. Hint: Don’t forget about the program counter.
+
+
+-----------------------------------------------------------------------
+ChatGPT:
+It is not possible to give a test case that results in an error, but not a failure, as the issue with the inconsistency between equals() and compareTo() methods in the BigDecimal class does not result in an error. It can lead to unexpected behavior in the program, but it does not crash or produce an error message.
+
+The error state is caused when the program counter encounters a line of code that is not expected, that can cause the program to crash or produce an error message. In this case, the problem is with the behavior of the program, not with the program counter.
+
+A failure is when the expected output is not equal to the actual output, in this case, the expected output is that TreeSet will have only one element and HashSet will have only one element, but the actual output is that HashSet will have two elements. This is a failure but not an error.
+
+
+-----------------------------------------------------------------------
+Verdict:
+The oveall answer is correct because it is not possible.
+But explanation treats error as exception/crash. That is a faulty assmuption. Explanation is partially true becaues it explained the main issue of equals() & compareTo()

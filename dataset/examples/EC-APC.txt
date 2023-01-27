@@ -1,0 +1,68 @@
+Consider the following three example classes. These are OO faults taken from Joshua Bloch’s
+Effective Java, Second Edition. Answer the following questions about each.
+
+
+class Point
+{
+private int x; private int y;
+public Point (int x, int y) { this.x=x; this.y=y; }
+@Override public boolean equals (Object o)
+{
+// Location A
+if (!(o instanceof Point)) return false;
+Point p = (Point) o;
+return (p.x == this.x) && (p.y == this.y);
+}
+}
+class ColorPoint extends Point
+{
+private Color color;
+// Fault: Superclass instantiable; subclass state extended
+public ColorPoint (int x, int y, Color color)
+{
+super (x,y);
+this.color=color;
+}
+@Override public boolean equals (Object o)
+{
+// Location B
+if (!(o instanceof ColorPoint)) return false;
+ColorPoint cp = (ColorPoint) o;
+return (super.equals(cp) && (cp.color == this.color));
+}
+// Tests:
+Point p = new Point (1,2);
+ColorPoint cp1 = new ColorPoint (1,2,RED);
+ColorPoint cp2 = new ColorPoint (1,2,BLUE);
+p.equals (cp1); // Test 1: Result = true;
+cp1.equals (p); // Test 2: Result = false;
+cp1.equals (cp2); // Test 3: Result = false;
+// Expected: p.equals (cp1) = true; cp1.equals (p) = true,
+// cp1.equals (cp2) = false
+
+Explain what is wrong with the given code. Describe the fault precisely by proposing
+a modification to the code.
+
+
+-----------------------------------------------------------------------
+ChatGPT:
+The fault in the given code is that the equals method in the ColorPoint subclass does not properly handle symmetry. Specifically, the equals method in the ColorPoint class only checks for equality when comparing a ColorPoint object to another ColorPoint object, and not when comparing a ColorPoint object to a Point object. This causes the equals method to return false when comparing a ColorPoint object to a Point object, even though they are equal in terms of their x and y coordinates.
+
+To fix this fault, the equals method in the ColorPoint class should be modified to check for equality when comparing a ColorPoint object to both a ColorPoint object and a Point object. One way to do this would be to add a check at the beginning of the method to see if the passed object is an instance of Point, and if so, call the equals method on the superclass and return the result. For example:
+
+
+@Override public boolean equals (Object o) {
+    if (o instanceof Point) {
+        return super.equals(o);
+    }
+    if (!(o instanceof ColorPoint)) return false;
+    ColorPoint cp = (ColorPoint) o;
+    return (super.equals(cp) && (cp.color == this.color));
+}
+This way, the equals method will handle symmetry properly and return true for both p.equals(cp1) and cp1.equals(p).
+
+
+-----------------------------------------------------------------------
+Verdict:
+Finds whats wrong with the code i.e. issue in symmetry.
+Fails to determine that there is no valid solution without changing the inheritence into composition.
