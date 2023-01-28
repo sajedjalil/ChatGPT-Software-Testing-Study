@@ -31,14 +31,19 @@ If not, briefly explain why not. Hint: Don’t forget about the program counter.
 
 -----------------------------------------------------------------------
 ChatGPT:
-It is not possible to give a test case that results in an error, but not a failure, as the issue with the inconsistency between equals() and compareTo() methods in the BigDecimal class does not result in an error. It can lead to unexpected behavior in the program, but it does not crash or produce an error message.
 
-The error state is caused when the program counter encounters a line of code that is not expected, that can cause the program to crash or produce an error message. In this case, the problem is with the behavior of the program, not with the program counter.
+It is not possible to give a test case that results in an error, but not a failure in this scenario.
+The fault in the `BigDecimal` class causes the `TreeSet` and `HashSet` classes to not behave as expected,
+but it does not result in any kind of error or exception.
+The program counter does not encounter any issues and the program execution continues normally.
 
-A failure is when the expected output is not equal to the actual output, in this case, the expected output is that TreeSet will have only one element and HashSet will have only one element, but the actual output is that HashSet will have two elements. This is a failure but not an error.
+It will not result in any error even if the program counter encounters the faulty code and execute it,
+but the behavior of the program will be incorrect and not as expected because of the fault in the `BigDecimal` class.
 
 
 -----------------------------------------------------------------------
 Verdict:
 The oveall answer is correct because it is not possible.
-But explanation treats error as exception/crash. That is a faulty assmuption. Explanation is partially true becaues it explained the main issue of equals() & compareTo()
+
+Explains where is the real issue but fails to understand the meaning of error. Treats error as exception/crash.
+That is a faulty assmuption. Explanation is partially true becaues it explained the main issue of equals() & compareTo()
