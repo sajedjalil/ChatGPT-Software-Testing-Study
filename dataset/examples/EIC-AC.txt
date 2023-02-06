@@ -1,42 +1,64 @@
 Question:
-/**
-   * Find LAST index of zero
-   *
-   * @param x array to search
-   * @return index of last 0 in x; -1 if absent
-   * @throws NullPointerException if x is null
-   */
-   public static int lastZero (int[] x)
-   {
-      for (int i = 0; i < x.length; i++)
-      {
-         if (x[i] == 0)
-         {
-            return i;
-         }
-      }
-      return -1;
-   }
-// test: x = [0, 1, 0]; Expected = 2
+"Consider the following three example classes. These are OO faults taken from Joshua Bloch’s
+Effective Java, Second Edition. Answer the following questions about each.
 
-If possible give a test case that results in an error, but not a failure.
-If not, briefly explain why not. Hint: Don’t forget about the program counter.
 
+class Point {
+    private int x;
+    private int y;
+
+    public Point (int x, int y) {
+        this.x=x; this.y=y;
+    }
+
+    @Override public boolean equals (Object o) {
+    // Location A
+        if (!(o instanceof Point)) return false;
+        Point p = (Point) o;
+        return (p.x == this.x) && (p.y == this.y);
+    }
+}
+
+class ColorPoint extends Point {
+    private Color color;
+    // Fault: Superclass instantiable; subclass state extended
+    public ColorPoint (int x, int y, Color color){
+        super (x,y);
+        this.color=color;
+    }
+    @Override public boolean equals (Object o){
+    // Location B
+        if (!(o instanceof ColorPoint)) return false;
+        ColorPoint cp = (ColorPoint) o;
+        return (super.equals(cp) && (cp.color == this.color));
+    }
+}
+
+// Tests:
+Point p = new Point (1,2);
+ColorPoint cp1 = new ColorPoint (1,2,RED);
+ColorPoint cp2 = new ColorPoint (1,2,BLUE);
+p.equals (cp1); // Test 1: Result = true;
+cp1.equals (p); // Test 2: Result = false;
+cp1.equals (cp2); // Test 3: Result = false;
+// Expected: p.equals (cp1) = true; cp1.equals (p) = true,
+// cp1.equals (cp2) = false
+
+If possible, give a test case that results in an error, but not a failure. If not, briefly
+explain why not. Hint: Don’t forget about the program counter.
 
 ChatGPT:
-A test case that results in an error, but not a failure is passing a null value to the function as an argument, for example:
+It is not possible to give a test case that results in an error but not a failure because the error in the given code is in the implementation of the equals method in the ColorPoint class, which does not properly check for equality of all relevant fields, including the color field, when comparing ColorPoint objects.
+This will result in incorrect output, but will not cause the program to fail or throw an exception. The program will run and complete its execution successfully, with the exception of returning incorrect results.
 
-Copy code
-lastZero(null);
-This will throw a NullPointerException because the code checks for a null value and throws an exception if the input array is null. This is an error because it indicates that something unexpected happened in the program, but it's not a failure because the program will not crash or halt, it will just throw an exception and the program can continue executing other lines of code after catching the exception.
+The program counter continues to execute the next instruction, even if the output is not correct, so the program does not fail or raise an error.
 
-In this scenario, the program counter will point to the line where the exception is thrown and the execution of the program will be interrupted until the exception is handled or the program exits.
-
-It is worth noting that this error case is handled explicitly by the code, it will throw the exception if the input is null, so it is not a failure but it is an error.
-
+In other words, the error in the given code is a semantic error, not a syntactic error or a runtime error.
 
 -----------------------------------------------------------------------
 Verdict:
 The answer is correct because it is possible.
 
-But explanation is not what expected.
+But the explanation is totally wrong.
+It treated error as the same as an exception or crash.
+But the book definition of error state varies.
