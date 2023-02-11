@@ -2,6 +2,8 @@
 
 A study on the capabilities of ChatGPT on correctly answering classroom assignments.
 
+Our pre-print **ChatGPT and Software Testing Education: Promises & Perils** is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287)
+
 ## Installation
 
 You can install the latest version of this software directly from github with pip:
