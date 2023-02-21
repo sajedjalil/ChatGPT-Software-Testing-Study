@@ -2,6 +2,10 @@
 
 A study on the capabilities of ChatGPT on correctly answering classroom assignments.
 
+:memo::exclamation: Our work **ChatGPT and Software Testing Education: Promises & Perils** has been accepted at **TestEd** in **ICST 2023**:exclamation:
+
+Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287)
+
 ## Installation
 
 You can install the latest version of this software directly from github with pip:
