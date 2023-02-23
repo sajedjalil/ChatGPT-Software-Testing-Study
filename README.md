@@ -45,7 +45,7 @@ Contains the same data as **combined.xlsx** except for the questions that are in
 ### Combined_analysis.xlsx
 Contains the result and analysis of the four research questions. Besides, it contains various illustrations for the results.
 
-### Combined-temp.xlsx
+### Combined_merged.xlsx
 Questions with missing shared contexts are replaced with the answers for the separate context to easily fetch the data for 
 RQ2 & RQ3 from a single column.
 
@@ -70,3 +70,7 @@ ChatGPT’s responses, we collect a total of three runs for each question, which
 Our dataset contains six questions that contain total 31 multipart questions or sub-questions and nine questions that do not. 
 These six sub-questions are asked in a chat thread that are shared with other sub-questions as long as the sub-questions 
 refer to the same code or scenario. 
+
+
+## More Questions??
+Reach me out to: [sjalil@gmu.edu](mailto:sjalil@gmu.edu)
