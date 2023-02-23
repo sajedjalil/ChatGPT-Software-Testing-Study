@@ -2,6 +2,10 @@
 
 A study on the capabilities of ChatGPT on correctly answering classroom assignments.
 
+:memo::exclamation: Our work **ChatGPT and Software Testing Education: Promises & Perils** has been accepted at **TestEd** in **ICST 2023**:exclamation:
+
+Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287)
+
 ## Installation
 
 You can install the latest version of this software directly from github with pip:
@@ -41,7 +45,7 @@ Contains the same data as **combined.xlsx** except for the questions that are in
 ### Combined_analysis.xlsx
 Contains the result and analysis of the four research questions. Besides, it contains various illustrations for the results.
 
-### Combined-merged.xlsx
+### Combined_merged.xlsx
 Questions with missing shared contexts are replaced with the answers for the separate context to easily fetch the data for 
 RQ2 & RQ3 from a single column.
 
