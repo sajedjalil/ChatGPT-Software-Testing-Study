@@ -32,7 +32,7 @@ From the terminal or IDE run ```__main__``` in the ```__init__.py``` of the src 
 Our dataset contains questions from a well-known software testing book **Introduction to Software Testing 2nd Edition** by Ammann and Offutt. 
 We use all the text-book questions in Chapters 1 to 5 that have solutions available on the book’s official website. 
 
-Our dataset contains 40 such questions from these five chapters. 31 questions out of the 40 are multipart questions and the rest 9 are independent.
+Our dataset contains 31 such questions from these five chapters. 27 questions out of the 31 are multipart questions and the rest 4 are independent.
 This tool generates responses from the ChatGPT automatically for these questions. All of these questions are run in both shared and separate context.
 More information about the contexts can be found below.
 
@@ -49,8 +49,11 @@ Contains the result and analysis of the four research questions. Besides, it con
 Questions with missing shared contexts are replaced with the answers for the separate context to easily fetch the data for 
 RQ2 & RQ3 from a single column.
 
-### examples folders
-Contains examples of some interesting response categories.
+### code vs. conceptual
+We further categorized our 31 question into code, concept or both. Our observation was ChatGPT performs worst when question asks for both code and concept.
+
+### dataset - Contains 40 Questions
+This folder analyzes the result if we include our discarded 9 questions that does not make sense for ChatGPT given that it is a textual response based AI.
 
 ### Case Study.pdf
 Contains the following analysis:
