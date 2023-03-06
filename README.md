@@ -1,20 +1,25 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7700501.svg)](https://doi.org/10.5281/zenodo.7700501)
 
-# Study-on-ChatGPT
+# ChatGPT Software Testing Study
 
-A study on the capabilities of ChatGPT on correctly answering classroom assignments.
+A study on the capabilities of ChatGPT on correctly answering software testing textbook questions.
 
-:memo::exclamation: Our work **ChatGPT and Software Testing Education: Promises & Perils** has been accepted in **ICSTW 2023**:exclamation:
+Our work on **"ChatGPT and Software Testing Education: Promises & Perils"** has been accepted in **ICSTW 2023**.
 
-Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287)
+Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287).
+
+# About
+This tool automatically gathers ChatGPT responses on predefined questions from an Excel sheet mentioned in ```src/constant.py```. One of the key difference of this tool with any other conventional tool is that it can collect responses from ChatGPT in both shared and separate chat contexts. Please see below sections for more information on [shared](#shared-context-query)  and [separate](#separate-context-query) contexts.
+
+The collected responses will be saved into the same Excel file that the tool is taking the questions from. This tool does not use the Official API endpoints for ChatGPT. Therefore, you might be limited by ChatGPT. If you are limited, please wait 1 hour before using this tool again.
 
 ## Installation
 
-You can install the latest version of this software directly from github with pip:
+You can install the latest version of this software directly from GitHub with ```pip```:
 
 ```pip install git+https://github.com/mmabrouk/chatgpt-wrapper```
 
-This will install chatgpt-wrapper and it's dependencies. Before starting the program, you will need to install a browser
+This will install chatgpt-wrapper and its dependencies. Before starting the program, you will need to install a browser
 in playwright (if you haven't already). The program will use firefox by default.
 
 ```playwright install firefox```
@@ -27,55 +32,49 @@ Log in to ChatGPT in the browser window, then stop the program.
 
 ## Usage
 
-From the terminal or IDE run ```__main__``` in the ```__init__.py``` of the src folder.
+From the terminal or IDE, run ```__main__``` function in the ```src/__init__.py``` file.
 
 
 ## Dataset Description
-Our dataset contains questions from a well-known software testing book **Introduction to Software Testing 2nd Edition** by Ammann and Offutt. 
+Our dataset contains questions from a well-known software testing book **''Introduction to Software Testing 2nd Edition''** by Ammann and Offutt. 
 We use all the text-book questions in Chapters 1 to 5 that have solutions available on the book’s official website. 
 
-Our dataset contains 31 such questions from these five chapters. 27 questions out of the 31 are multipart questions and the rest 4 are independent.
+Our dataset contains 31 such questions from these five chapters. 27 questions out of the 31 are multipart questions and the remaining 4 are independent.
 This tool generates responses from the ChatGPT automatically for these questions. All of these questions are run in both shared and separate context.
 More information about the contexts can be found below.
 
-### Combined.xlsx
+### dataset/combined.xlsx
 Contains all the questions & answers for 3 iterations of both shared and separate contexts. Contains labels for answers and explanations given by ChatGPT.
 
-### Combined_pair.xlsx
+### dataset/combined_pair.xlsx
 Contains the same data as **combined.xlsx** except for the questions that are independent i.e., not part of a multipart question.
 
-### Combined_analysis.xlsx
-Contains the result and analysis of the four research questions. Besides, it contains various illustrations for the results.
+### dataset/combined_analysis.xlsx
+Contains the result and analysis of the four research questions. It also contains various illustrations of the results.
 
-### Combined_merged.xlsx
+### dataset/combined_merged.xlsx
 Questions with missing shared contexts are replaced with the answers for the separate context to easily fetch the data for 
 RQ2 & RQ3 from a single column.
 
-### code vs. conceptual
-We further categorized our 31 question into code, concept or both. Our observation was ChatGPT performs worst when question asks for both code and concept.
-
-### dataset - Contains 40 Questions
-This folder analyzes the result if we include our discarded 9 questions that does not make sense for ChatGPT given that it is a textual response based AI.
-
-### Case Study.pdf
-Contains the following analysis:
-- When responses are likely to be incorrect?
-- What are the reasons for being incorrect?
-- Can we fix it with prompt engineering?
-- Case studies with actual examples.
-
-
 ## Separate Context Query
-In separate context queries, we treat each of the 31 multipart questions as an independent question.
+In separate context queries, we treat each of the 27 multipart questions as an independent question.
 Each sub-question is asked in a separate chat thread.
-Combining with the nine independent questions, a total of 40 questions are asked for each run. To evaluate the consistency in
-ChatGPT’s responses, we collect a total of three runs for each question, which results in a total of 120 responses from ChatGPT.
+Combining with the nine independent questions, a total of 31 questions are asked for each run. To evaluate the consistency in
+ChatGPT’s responses, we collect a total of three runs for each question, which results in a total of 93 responses from ChatGPT.
 
 ## Shared Context Query
-Our dataset contains six questions that contain total 31 multipart questions or sub-questions and nine questions that do not. 
+Our dataset contains six questions that contain total 27 multipart questions or sub-questions and four questions that do not. 
 These six sub-questions are asked in a chat thread that are shared with other sub-questions as long as the sub-questions 
 refer to the same code or scenario. 
 
 
-## More Questions??
-Reach me out to: [sjalil@gmu.edu](mailto:sjalil@gmu.edu)
+# Cite
+If you use our work, please cite our corresponding [ICSTW paper](https://arxiv.org/abs/2302.03287):
+```
+@inproceedings{jalil2023chatgpt,
+    title={ChatGPT and Software Testing Education: Promises & Perils},
+    author={Sajed Jalil and Suzzana Rafi and Thomas D. LaToza and Kevin Moran and Wing Lam},
+    booktitle = {16th {IEEE} International Conference on Software Testing, Verification and Validation Workshops {ICSTW} 2023, Dublin, Ireland, April 16, 2023},
+    year      = {2023},
+}
+```
