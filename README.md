@@ -9,7 +9,7 @@ Our work on **"ChatGPT and Software Testing Education: Promises & Perils"** has 
 Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287).
 
 # About
-This tool automatically gathers ChatGPT responses on predefined questions from an Excel sheet mentioned in ```src/constant.py```. One of the key difference of this tool with any other conventional tool is that it can collect responses from ChatGPT in both shared and separate chat contexts. Please see below sections for more information on [shared](#shared-context-query)  and [separate](#separate-context-query) contexts.
+This tool automatically gathers ChatGPT responses on predefined questions from an Excel sheet mentioned in ```src/constant.py```. One of the key difference of this tool with any other conventional tool is that it can collect responses from ChatGPT in both shared and separate chat contexts. Please read [our paper](https://arxiv.org/abs/2302.03287) for more information on shared and separate contexts.
 
 The collected responses will be saved into the same Excel file that the tool is taking the questions from. This tool does not use the Official API endpoints for ChatGPT. Therefore, you might be limited by ChatGPT. If you are limited, please wait 1 hour before using this tool again.
 
@@ -56,25 +56,14 @@ Contains the result and analysis of the four research questions. It also contain
 Questions with missing shared contexts are replaced with the answers for the separate context to easily fetch the data for 
 RQ2 & RQ3 from a single column.
 
-## Separate Context Query
-In separate context queries, we treat each of the 27 multipart questions as an independent question.
-Each sub-question is asked in a separate chat thread.
-Combining with the nine independent questions, a total of 31 questions are asked for each run. To evaluate the consistency in
-ChatGPT’s responses, we collect a total of three runs for each question, which results in a total of 93 responses from ChatGPT.
-
-## Shared Context Query
-Our dataset contains six questions that contain total 27 multipart questions or sub-questions and four questions that do not. 
-These six sub-questions are asked in a chat thread that are shared with other sub-questions as long as the sub-questions 
-refer to the same code or scenario. 
-
 
 # Cite
 If you use our work, please cite our corresponding [ICSTW paper](https://arxiv.org/abs/2302.03287):
 ```
 @inproceedings{jalil2023chatgpt,
-    title={ChatGPT and Software Testing Education: Promises & Perils},
+    title={{ChatGPT} and Software Testing Education: {P}romises & Perils},
     author={Sajed Jalil and Suzzana Rafi and Thomas D. LaToza and Kevin Moran and Wing Lam},
-    booktitle = {16th {IEEE} International Conference on Software Testing, Verification and Validation Workshops {ICSTW} 2023, Dublin, Ireland, April 16, 2023},
-    year      = {2023},
+    booktitle = {16th {IEEE} International Conference on Software Testing, Verification and Validation Workshops},
+    year      = {2023}
 }
 ```
