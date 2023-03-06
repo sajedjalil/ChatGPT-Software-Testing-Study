@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7700501.svg)](https://doi.org/10.5281/zenodo.7700501)
+
 # Study-on-ChatGPT
 
 A study on the capabilities of ChatGPT on correctly answering classroom assignments.
