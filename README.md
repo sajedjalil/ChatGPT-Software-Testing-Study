@@ -6,6 +6,8 @@ A study on the capabilities of ChatGPT on correctly answering software testing t
 
 Our work on **"ChatGPT and Software Testing Education: Promises & Perils"** has been accepted in **ICSTW 2023**.
 
+IEEEXplore link: [ieeexplore](https://ieeexplore.ieee.org/abstract/document/10132255)
+
 Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287).
 
 # About
@@ -60,10 +62,13 @@ RQ2 & RQ3 from a single column.
 # Cite
 If you use our work, please cite our corresponding [ICSTW paper](https://arxiv.org/abs/2302.03287):
 ```
-@inproceedings{jalil2023chatgpt,
-    title={{ChatGPT} and Software Testing Education: {P}romises & Perils},
-    author={Sajed Jalil and Suzzana Rafi and Thomas D. LaToza and Kevin Moran and Wing Lam},
-    booktitle = {16th {IEEE} International Conference on Software Testing, Verification and Validation Workshops},
-    year      = {2023}
-}
+@INPROCEEDINGS{10132255,
+  author={Jalil, Sajed and Rafi, Suzzana and LaToza, Thomas D. and Moran, Kevin and Lam, Wing},
+  booktitle={2023 IEEE International Conference on Software Testing, Verification and Validation Workshops (ICSTW)}, 
+  title={ChatGPT and Software Testing Education: Promises & Perils}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={4130-4137},
+  doi={10.1109/ICSTW58534.2023.00078}}
 ```
