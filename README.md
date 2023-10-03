@@ -11,7 +11,7 @@ IEEEXplore link: [ieeexplore](https://ieeexplore.ieee.org/abstract/document/1013
 Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287).
 
 # About
-This tool automatically gathers ChatGPT responses on predefined questions from an Excel sheet mentioned in ```src/constant.py```. One of the key difference of this tool with any other conventional tool is that it can collect responses from ChatGPT in both shared and separate chat contexts. Please read [our paper](https://arxiv.org/abs/2302.03287) for more information on shared and separate contexts.
+This tool automatically gathers ChatGPT responses on predefined questions from an Excel sheet mentioned in ```src/constant.py```. One of the key differences of this tool with any other conventional tool is that it can collect responses from ChatGPT in both shared and separate chat contexts. Please read [our paper](https://arxiv.org/abs/2302.03287) for more information on shared and separate contexts.
 
 The collected responses will be saved into the same Excel file that the tool is taking the questions from. This tool does not use the Official API endpoints for ChatGPT. Therefore, you might be limited by ChatGPT. If you are limited, please wait 1 hour before using this tool again.
 
@@ -22,7 +22,7 @@ You can install the latest version of this software directly from GitHub with ``
 ```pip install git+https://github.com/mmabrouk/chatgpt-wrapper```
 
 This will install chatgpt-wrapper and its dependencies. Before starting the program, you will need to install a browser
-in playwright (if you haven't already). The program will use firefox by default.
+in Playwright (if you haven't already). The program will use Firefox by default.
 
 ```playwright install firefox```
 
@@ -39,10 +39,10 @@ From the terminal or IDE, run ```__main__``` function in the ```src/__init__.py`
 
 ## Dataset Description
 Our dataset contains questions from a well-known software testing book **''Introduction to Software Testing 2nd Edition''** by Ammann and Offutt. 
-We use all the text-book questions in Chapters 1 to 5 that have solutions available on the book’s official website. 
+We use all the textbook questions in Chapters 1 to 5 that have solutions available on the book’s official website. 
 
 Our dataset contains 31 such questions from these five chapters. 27 questions out of the 31 are multipart questions and the remaining 4 are independent.
-This tool generates responses from the ChatGPT automatically for these questions. All of these questions are run in both shared and separate context.
+This tool generates responses from the ChatGPT automatically for these questions. All of these questions are run in both shared and separate contexts.
 More information about the contexts can be found below.
 
 ### dataset/combined.xlsx
@@ -52,7 +52,7 @@ Contains all the questions & answers for 3 iterations of both shared and separat
 Contains the same data as **combined.xlsx** except for the questions that are independent i.e., not part of a multipart question.
 
 ### dataset/combined_analysis.xlsx
-Contains the result and analysis of the four research questions. It also contains various illustrations of the results.
+Contains the results and analysis of the four research questions. It also contains various illustrations of the results.
 
 ### dataset/combined_merged.xlsx
 Questions with missing shared contexts are replaced with the answers for the separate context to easily fetch the data for 
@@ -60,15 +60,14 @@ RQ2 & RQ3 from a single column.
 
 
 # Cite
-If you use our work, please cite our corresponding [ICSTW paper](https://arxiv.org/abs/2302.03287):
+If you use our work, please cite our corresponding [ICSTW paper]([[https://arxiv.org/abs/2302.03287](https://ieeexplore.ieee.org/document/10132255)])(https://ieeexplore.ieee.org/document/10132255):
 ```
-@INPROCEEDINGS{10132255,
-  author={Jalil, Sajed and Rafi, Suzzana and LaToza, Thomas D. and Moran, Kevin and Lam, Wing},
-  booktitle={2023 IEEE International Conference on Software Testing, Verification and Validation Workshops (ICSTW)}, 
-  title={ChatGPT and Software Testing Education: Promises & Perils}, 
+@inproceedings{jalil2023chatgpt,
+  title={Chatgpt and software testing education: Promises \& perils},
+  author={Jalil, Sajed and Rafi, Suzzana and LaToza, Thomas D and Moran, Kevin and Lam, Wing},
+  booktitle={2023 IEEE International Conference on Software Testing, Verification and Validation Workshops (ICSTW)},
+  pages={4130--4137},
   year={2023},
-  volume={},
-  number={},
-  pages={4130-4137},
-  doi={10.1109/ICSTW58534.2023.00078}}
+  organization={IEEE}
+}
 ```
