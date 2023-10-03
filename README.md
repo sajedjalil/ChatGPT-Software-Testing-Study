@@ -11,7 +11,7 @@ IEEEXplore link: [ieeexplore](https://ieeexplore.ieee.org/abstract/document/1013
 Pre-print is now available at [arXiv.2302.03287](https://arxiv.org/abs/2302.03287).
 
 # About
-This tool automatically gathers ChatGPT responses on predefined questions from an Excel sheet mentioned in ```src/constant.py```. One of the key differences of this tool with any other conventional tool is that it can collect responses from ChatGPT in both shared and separate chat contexts. Please read [our paper](https://arxiv.org/abs/2302.03287) for more information on shared and separate contexts.
+This tool automatically gathers ChatGPT responses on predefined questions from an Excel sheet mentioned in ```src/constant.py```. One of the key differences between this tool with any other conventional tool is that it can collect responses from ChatGPT in both shared and separate chat contexts. Please read [our paper](https://ieeexplore.ieee.org/document/10132255) for more information on shared and separate contexts.
 
 The collected responses will be saved into the same Excel file that the tool is taking the questions from. This tool does not use the Official API endpoints for ChatGPT. Therefore, you might be limited by ChatGPT. If you are limited, please wait 1 hour before using this tool again.
 
